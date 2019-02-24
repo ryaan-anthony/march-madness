@@ -12,6 +12,12 @@ module MarchMadness
       )
     end
 
+    def game_summary(game_id)
+      GameSummary.new(
+        request("ncaamb/trial/v4/en/games/#{game_id}/summary.json")
+      )
+    end
+
     private
 
     def request(path, overrides = {})

@@ -19,11 +19,15 @@ Rename `mv config.yml{.sample,}` and configure your database, add your sports ra
 
 * Run the commands
 
-1. Output today's games at 9am
+1. Refresh the games daily at 12pm EST
 ```
-bundle exec rake todays_games
+bundle exec rake refresh_games
 ```
-2. Update games every half hour between 1pm - 1am EST 
+2. Notify when games are starting every half hour between 1pm - 1am EST 
 ```
-bundle exec rake update_games
+bundle exec rake starting_soon
+```
+3. Notify final scores every half hour between 1pm - 1am EST 
+```
+bundle exec rake final_scores
 ```

@@ -5,17 +5,16 @@ task :console do
  binding.pry
 end
 
-desc 'Todays games'
-task :todays_games do
- Rake::Task[:refresh_games].execute
- MarchMadness::Game.all.each do |game|
-  game_time = game.scheduled_at
-  slack.puts "#{game.away_team} vs #{game.home_team} @ #{game_time} EST"
+desc 'Games starting soon'
+task :starting_soon do
+ MarchMadness::Game.pending_notification.starting_soon.each do |game|
+  game.update_attributes(notified: true)
+  slack.puts "#{game.away_team} vs #{game.home_team} @ #{game.time} EST"
  end
 end
 
-desc 'Update games'
-task :update_games do
+desc 'Final scores'
+task :final_scores do
  MarchMadness::Game.started.incomplete.each do |game|
   summary = MarchMadness::SportsRadar.new.game_summary(game.id)
   if summary.closed?

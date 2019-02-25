@@ -17,6 +17,11 @@ module MarchMadness
     validates :scheduled_at, presence: true
 
     scope :incomplete, -> { where(complete: false) }
+    scope :started, -> { where(:scheduled_at.lt => Time.now) }
+
+    def scheduled_at
+      super.in_time_zone('Eastern Time (US & Canada)').strftime('%l:%M%p').strip
+    end
 
     def away_rank
       rank(super)

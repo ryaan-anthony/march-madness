@@ -9,14 +9,14 @@ desc 'Todays games'
 task :todays_games do
  Rake::Task[:refresh_games].execute
  MarchMadness::Game.all.each do |game|
-  game_time = game.scheduled_at.strftime('%l:%M%p').strip
+  game_time = game.scheduled_at
   puts "#{game.away_team} vs #{game.home_team} @ #{game_time}"
  end
 end
 
 desc 'Update games'
 task :update_games do
- MarchMadness::Game.incomplete.each do |game|
+ MarchMadness::Game.started.incomplete.each do |game|
   summary = MarchMadness::SportsRadar.new.game_summary(game.id)
   if summary.closed?
    game.update_attributes(
@@ -41,7 +41,7 @@ task :refresh_games do
     id: game['id'],
     home_team: game['home']['name'],
     away_team: game['away']['name'],
-    scheduled_at: DateTime.parse(game['scheduled']).in_time_zone('Eastern Time (US & Canada)')
+    scheduled_at: DateTime.parse(game['scheduled'])
   )
  end
 end

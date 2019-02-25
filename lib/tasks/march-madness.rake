@@ -9,7 +9,7 @@ desc 'Games starting soon'
 task :starting_soon do
  MarchMadness::Game.pending_notification.starting_soon.each do |game|
   game.update_attributes(notified: true)
-  slack.puts "#{game.away_team} vs #{game.home_team} @ #{game.time} EST"
+  slack.puts "Starting soon: #{game.away_team} vs #{game.home_team} @ #{game.time} EST #{game.channel}"
  end
 end
 
@@ -40,7 +40,8 @@ task :refresh_games do
     id: game['id'],
     home_team: game['home']['name'],
     away_team: game['away']['name'],
-    scheduled_at: DateTime.parse(game['scheduled'])
+    scheduled_at: DateTime.parse(game['scheduled']),
+    channel: game['broadcast'].present? ? game['broadcast']['network'] : nil
   )
  end
 end

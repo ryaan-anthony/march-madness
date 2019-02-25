@@ -10,6 +10,7 @@ module MarchMadness
     field :home_rank, type: Integer
     field :home_score, type: Integer
     field :home_team, type: String
+    field :channel, type: String
     field :scheduled_at, type: DateTime
 
     validates :id, presence: true
@@ -21,6 +22,10 @@ module MarchMadness
     scope :started, -> { where(:scheduled_at.lt => DateTime.now) }
     scope :starting_soon, -> { where(:scheduled_at.lt => DateTime.now + (2/24.0)) }
     scope :pending_notification, -> { where(notified: false) }
+
+    def channel
+      super ? "on #{super}" : nil
+    end
 
     def time
       scheduled_at.in_time_zone('Eastern Time (US & Canada)').strftime('%l:%M%p').strip

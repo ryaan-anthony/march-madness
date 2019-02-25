@@ -9,8 +9,9 @@ module MarchMadness
   autoload :Game,         'march-madness/models/game'
   autoload :GameSummary,  'march-madness/models/response/game_summary'
   autoload :Response,     'march-madness/response'
+  autoload :Slack,        'march-madness/services/slack'
   autoload :SportsRadar,  'march-madness/services/sports_radar'
   autoload :TodaysGames,  'march-madness/models/response/todays_games'
 end
 
-Mongoid.load!('mongoid.yml', :development)
+Mongoid.load!('config.yml', :mongo)

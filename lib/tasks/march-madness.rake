@@ -10,7 +10,7 @@ task :todays_games do
  Rake::Task[:refresh_games].execute
  MarchMadness::Game.all.each do |game|
   game_time = game.scheduled_at
-  puts "#{game.away_team} vs #{game.home_team} @ #{game_time}"
+  slack.puts "#{game.away_team} vs #{game.home_team} @ #{game_time} EST"
  end
 end
 
@@ -26,7 +26,7 @@ task :update_games do
      away_rank: summary.away_rank,
      home_rank: summary.home_rank,
    )
-   puts "Final score #{game.away_team}#{game.away_rank} #{game.away_score},"\
+   slack.puts "Final score #{game.away_team}#{game.away_rank} #{game.away_score},"\
         " #{game.home_team}#{game.home_rank} #{game.home_score}"
   end
   sleep(2)
@@ -44,4 +44,9 @@ task :refresh_games do
     scheduled_at: DateTime.parse(game['scheduled'])
   )
  end
+end
+
+
+def slack
+ @slack ||= MarchMadness::Slack.new
 end

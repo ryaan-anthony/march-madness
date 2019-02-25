@@ -1,7 +1,7 @@
 module MarchMadness
   class SportsRadar
     def initialize
-      @config = Config.new('secrets.yml', 'sports_radar')
+      @config = Config.new('config.yml', 'sports_radar')
     end
 
     def todays_games

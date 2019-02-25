@@ -1,3 +1,2 @@
-mongoid.yml
-secrets.yml
+config.yml
 .idea

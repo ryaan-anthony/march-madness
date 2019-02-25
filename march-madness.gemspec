@@ -12,5 +12,4 @@ Gem::Specification.new do |s|
   s.files       = []
   s.homepage    = 'http://rubygems.org/gems/march-madness'
   s.license     = 'MIT'
-  s.add_runtime_dependency 'yaml'
 end

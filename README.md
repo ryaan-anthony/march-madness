@@ -13,20 +13,16 @@ MongoDB 3.2
 gem install march-madness
 ```
 
-* Configure
-
-Set the following env vars..
+* Set the following env vars
 
 MongoDB URI:
 ```
 MONGODB_URI=mongodb://127.0.0.1:27017/march_madness
 ```
-
 Slack webhook:
 ```
 SLACK_WEBHOOK=https://hooks.slack.com/services/xxxxxxxxx/xxxxxxxxx/xxxxxxxxx
 ```
-
 Sportsradar API key:
 ```
 SPORTSRADAR_API_KEY=xxxxxxxxx
@@ -35,15 +31,11 @@ SPORTSRADAR_API_KEY=xxxxxxxxx
 
 * Run the commands
 
-1. Refresh the games daily at 12pm EST
+1. Refresh the games daily
 ```
 bundle exec rake refresh_games
 ```
-2. Notify when games are starting every half hour between 1pm - 1am EST 
+2. Notify when games are starting and final scores hourly
 ```
-bundle exec rake starting_soon
-```
-3. Notify final scores every half hour between 1pm - 1am EST 
-```
-bundle exec rake final_scores
+bundle exec rake report
 ```

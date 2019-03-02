@@ -5,6 +5,17 @@ task :console do
  binding.pry
 end
 
+desc 'Test slack'
+task :test_slack do
+ slack.puts 'Test post'
+end
+
+desc 'Report on games hourly'
+task :report do
+ Rake::Task[:final_scores].execute
+ Rake::Task[:starting_soon].execute
+end
+
 desc 'Games starting soon'
 task :starting_soon do
  MarchMadness::Game.pending_notification.starting_soon.each do |game|
@@ -45,7 +56,6 @@ task :refresh_games do
   )
  end
 end
-
 
 def slack
  @slack ||= MarchMadness::Slack.new

@@ -1,0 +1,9 @@
+sports_radar:
+  api_key: <%= ENV['SPORTSRADAR_API_KEY'] %>
+  host: https://api.sportradar.us/
+slack:
+  host: <%= ENV['SLACK_WEBHOOK'] %>
+mongo:
+  clients:
+    default:
+      uri: <%= ENV['MONGODB_URI'] %>

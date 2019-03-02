@@ -7,7 +7,6 @@ module MarchMadness
     def puts(message)
       client.post(
         headers: {'Content-type': 'application/json'},
-        path: @config.webhook_path,
         body: { text: message }.to_json
       )
     end

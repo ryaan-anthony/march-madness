@@ -42,7 +42,7 @@ module MarchMadness
     private
 
     def rank(rank)
-      rank > 0 ? "(#{rank})" : nil
+      rank > 0 ? "(##{rank})" : nil
     end
   end
 end

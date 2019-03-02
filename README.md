@@ -15,7 +15,23 @@ gem install march-madness
 
 * Configure
 
-Rename `mv config.yml{.sample,}` and configure your database, add your sports radar API key, and slack webhook path.
+Set the following env vars..
+
+MongoDB URI:
+```
+MONGODB_URI=mongodb://127.0.0.1:27017/march_madness
+```
+
+Slack webhook:
+```
+SLACK_WEBHOOK=https://hooks.slack.com/services/xxxxxxxxx/xxxxxxxxx/xxxxxxxxx
+```
+
+Sportsradar API key:
+```
+SPORTSRADAR_API_KEY=xxxxxxxxx
+```
+
 
 * Run the commands
 

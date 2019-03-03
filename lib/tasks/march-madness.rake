@@ -40,7 +40,7 @@ task :final_scores do
    away = game.away_score > game.home_score ? "*#{away}*" : away
    home = "#{game.home_team}#{game.home_rank} #{game.home_score}"
    home = game.home_score > game.away_score ? "*#{home}*" : home
-   slack.puts "Final score #{away}, #{home}"
+   slack.puts "Final score #{away}, #{home}" if game.home_rank || game.away_rank
   end
   sleep(2)
  end

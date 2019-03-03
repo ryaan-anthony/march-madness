@@ -20,7 +20,7 @@ module MarchMadness
 
     scope :incomplete, -> { where(complete: false) }
     scope :started, -> { where(:scheduled_at.lt => DateTime.now) }
-    scope :starting_soon, -> { where(:scheduled_at.lt => DateTime.now + (2/24.0)) }
+    scope :starting_soon, -> { where(:scheduled_at.lt => DateTime.now + (1/24.0)) }
     scope :pending_notification, -> { where(notified: false) }
 
     def channel

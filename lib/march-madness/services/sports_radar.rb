@@ -5,7 +5,7 @@ module MarchMadness
     end
 
     def todays_games
-      today = Date.today
+      today = Date.today.in_time_zone('Eastern Time (US & Canada)')
       date_format = "#{today.year}/#{today.month}/#{today.day}"
       TodaysGames.new(
         request("ncaamb/trial/v4/en/games/#{date_format}/schedule.json")

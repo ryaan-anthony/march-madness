@@ -7,7 +7,7 @@ end
 
 desc 'Test slack'
 task :test_slack do
- slack.puts Date.today
+ slack.puts 'Test post'
 end
 
 desc 'Report on games hourly'

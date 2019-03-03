@@ -19,8 +19,8 @@ module MarchMadness
     validates :scheduled_at, presence: true
 
     scope :incomplete, -> { where(complete: false) }
-    scope :started, -> { where(:scheduled_at.lt => DateTime.now) }
-    scope :starting_soon, -> { where(:scheduled_at.lt => DateTime.now + (1/24.0)) }
+    scope :started, -> { where(:scheduled_at.lt => DateTime.now - (1/15.0)) }
+    scope :starting_soon, -> { where(:scheduled_at.lt => DateTime.now + (0.5/24.0)) }
     scope :pending_notification, -> { where(notified: false) }
 
     def channel

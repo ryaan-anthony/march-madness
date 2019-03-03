@@ -5,7 +5,7 @@ module MarchMadness
     end
 
     def home_rank
-      body['home']['rank']
+      body['home']['rank'].to_i
     end
 
     def home_points
@@ -13,7 +13,7 @@ module MarchMadness
     end
 
     def away_rank
-      body['away']['rank']
+      body['away']['rank'].to_i
     end
 
     def away_points

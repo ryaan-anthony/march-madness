@@ -13,6 +13,7 @@ module MarchMadness
     end
 
     def game_summary(game_id)
+      sleep(1.1) # trial api limits
       GameSummary.new(
         request("ncaamb/trial/v4/en/games/#{game_id}/summary.json")
       )

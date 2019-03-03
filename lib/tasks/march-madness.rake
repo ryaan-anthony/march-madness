@@ -26,22 +26,26 @@ end
 
 desc 'Final scores'
 task :final_scores do
- MarchMadness::Game.started.incomplete.each do |game|
-  summary = MarchMadness::SportsRadar.new.game_summary(game.id)
-  if summary.closed?
-   game.update_attributes(
-     complete: true,
-     away_score: summary.away_points,
-     home_score: summary.home_points,
-     away_rank: summary.away_rank,
-     home_rank: summary.home_rank,
-   )
-   away = "#{game.away_team}#{game.away_rank} #{game.away_score}"
-   away = game.away_score > game.home_score ? "*#{away}*" : away
-   home = "#{game.home_team}#{game.home_rank} #{game.home_score}"
-   home = game.home_score > game.away_score ? "*#{home}*" : home
-   slack.puts "Final score #{away}, #{home}"
+ begin
+  MarchMadness::Game.started.incomplete.each do |game|
+   summary = MarchMadness::SportsRadar.new.game_summary(game.id)
+   if summary.closed?
+    game.update_attributes(
+      complete: true,
+      away_score: summary.away_points,
+      home_score: summary.home_points,
+      away_rank: summary.away_rank,
+      home_rank: summary.home_rank,
+    )
+    away = "#{game.away_team}#{game.away_rank} #{game.away_score}"
+    away = game.away_score > game.home_score ? "*#{away}*" : away
+    home = "#{game.home_team}#{game.home_rank} #{game.home_score}"
+    home = game.home_score > game.away_score ? "*#{home}*" : home
+    slack.puts "Final score #{away}, #{home}"
+   end
   end
+ rescue => e
+  slack.puts e.message
  end
 end
 

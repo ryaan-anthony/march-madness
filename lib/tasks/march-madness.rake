@@ -7,7 +7,7 @@ end
 
 desc 'Test slack'
 task :test_slack do
- slack.puts DateTime.now
+ slack.puts 'Test post'
 end
 
 desc 'Report on games hourly'
@@ -47,21 +47,25 @@ end
 
 desc 'Refresh games'
 task :refresh_games do
- MarchMadness::Game.destroy_all
- gateway = MarchMadness::SportsRadar.new
- gateway.todays_games.each do |game|
-  next unless DateTime.parse(game['scheduled']).future?
-  summary = gateway.game_summary(game['id'])
-  next unless summary.away_rank > 0 || summary.home_rank > 0
-  MarchMadness::Game.find_or_create_by(
-    id: game['id'],
-    home_team: game['home']['name'],
-    away_team: game['away']['name'],
-    away_rank: summary.away_rank,
-    home_rank: summary.home_rank,
-    scheduled_at: DateTime.parse(game['scheduled']),
-    channel: game['broadcast'].present? ? game['broadcast']['network'] : nil
-  )
+ begin
+  MarchMadness::Game.destroy_all
+  gateway = MarchMadness::SportsRadar.new
+  gateway.todays_games.each do |game|
+   next unless DateTime.parse(game['scheduled']).future?
+   summary = gateway.game_summary(game['id'])
+   next unless summary.away_rank > 0 || summary.home_rank > 0
+   MarchMadness::Game.find_or_create_by(
+     id: game['id'],
+     home_team: game['home']['name'],
+     away_team: game['away']['name'],
+     away_rank: summary.away_rank,
+     home_rank: summary.home_rank,
+     scheduled_at: DateTime.parse(game['scheduled']),
+     channel: game['broadcast'].present? ? game['broadcast']['network'] : nil
+   )
+  end
+ rescue => e
+   slack.puts e.message
  end
 end
 

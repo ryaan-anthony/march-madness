@@ -18,7 +18,7 @@ end
 
 desc 'Games starting soon'
 task :starting_soon do
- MarchMadness::Game.pending_notification.each do |game|
+ MarchMadness::Game.pending_notification.starting_soon.each do |game|
   game.update_attributes(notified: true)
   slack.puts "Starting soon: #{game.away_team}#{game.away_rank} vs #{game.home_team}#{game.home_rank} @ #{game.time} EST #{game.channel}"
  end

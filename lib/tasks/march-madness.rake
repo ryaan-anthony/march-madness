@@ -5,12 +5,10 @@ task :console do
  binding.pry
 end
 
-desc 'Run the app'
+desc 'Run the application'
 task :app do
-  app = MarchMadness::App.new(slack)
- loop { app.run; sleep 600 }
+ loop { application.run; sleep 600 }
 end
-
 
 desc 'Test slack'
 task :test_slack do
@@ -36,6 +34,13 @@ end
 desc 'Refresh games'
 task :refresh_games do
  MarchMadness::RefreshGames.new.perform
+end
+
+def application
+ @application ||= MarchMadness::App.new(
+   Rake::Task[:refresh_games],
+   Rake::Task[:report]
+ )
 end
 
 def slack

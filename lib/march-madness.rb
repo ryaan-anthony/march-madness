@@ -4,7 +4,7 @@ require 'mongoid'
 require 'yaml'
 
 module MarchMadness
-  autoload :App,          'march-madness/workers/app'
+  autoload :App,          'march-madness/app'
   autoload :Client,       'march-madness/client'
   autoload :Config,       'march-madness/config'
   autoload :FinalScores,  'march-madness/workers/final_scores'

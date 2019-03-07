@@ -29,7 +29,7 @@ SPORTSRADAR_API_KEY=xxxxxxxxx
 ```
 
 
-* Run the commands
+* Run the commands manually
 
 1. Refresh the games daily
 ```
@@ -39,3 +39,9 @@ bundle exec rake refresh_games
 ```
 bundle exec rake report
 ```
+
+* Or run in the background
+```
+bundle exec rake app
+```
+

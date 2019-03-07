@@ -1,1 +1,1 @@
-worker: bundle exec rake app
+web: bundle exec rake app

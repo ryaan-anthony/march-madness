@@ -3,8 +3,6 @@ module MarchMadness
     @last_refreshed = nil
 
     def run
-      puts :start
-
       unless @last_refreshed == today.day
         @last_refreshed = today.day
         MarchMadness::RefreshGames.new.perform
@@ -12,8 +10,6 @@ module MarchMadness
 
       MarchMadness::StartingSoon.new(@output).perform
       MarchMadness::FinalScores.new(@output).perform
-
-      puts :end
     end
 
     def today

@@ -1,13 +1,13 @@
 require 'march-madness'
 
-desc 'Run the console'
-task :console do
+desc 'Pry'
+task :pry do
  binding.pry
 end
 
-desc 'Run the application'
-task :app do
- loop { application.run; sleep 600 }
+desc 'Run in the background'
+task :scheduled_job do
+ loop { scheduled_job.run; sleep 600 }
 end
 
 desc 'Test slack'
@@ -36,8 +36,8 @@ task :refresh_games do
  MarchMadness::RefreshGames.new.perform
 end
 
-def application
- @application ||= MarchMadness::App.new(
+def scheduled_job
+ @scheduled_job ||= MarchMadness::ScheduledJob.new(
    Rake::Task[:refresh_games],
    Rake::Task[:report]
  )

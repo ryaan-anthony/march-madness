@@ -1,6 +1,6 @@
 module MarchMadness
-  class App
-    def initialize(daily, always)
+  class ScheduledJob
+    def initialize(daily = nil, always = nil)
       @daily = daily
       @always = always
       @today = nil
@@ -9,10 +9,10 @@ module MarchMadness
     def run
       unless @today == today.day
         @today = today.day
-        @daily.execute
+        @daily&.execute
       end
 
-      @always.execute
+      @always&.execute
     end
 
     def today

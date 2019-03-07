@@ -42,6 +42,6 @@ bundle exec rake report
 
 * Or run in the background
 ```
-bundle exec rake app
+bundle exec rake scheduled_job
 ```
 

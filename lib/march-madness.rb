@@ -4,7 +4,6 @@ require 'mongoid'
 require 'yaml'
 
 module MarchMadness
-  autoload :App,          'march-madness/app'
   autoload :Client,       'march-madness/client'
   autoload :Config,       'march-madness/config'
   autoload :FinalScores,  'march-madness/workers/final_scores'
@@ -12,6 +11,7 @@ module MarchMadness
   autoload :GameSummary,  'march-madness/models/response/game_summary'
   autoload :RefreshGames, 'march-madness/workers/refresh_games'
   autoload :Response,     'march-madness/response'
+  autoload :ScheduledJob, 'march-madness/scheduled_job'
   autoload :Slack,        'march-madness/services/slack'
   autoload :SportsRadar,  'march-madness/services/sports_radar'
   autoload :TodaysGames,  'march-madness/models/response/todays_games'
